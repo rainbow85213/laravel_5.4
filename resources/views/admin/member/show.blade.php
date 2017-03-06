@@ -42,7 +42,7 @@
                     <label for="membEmail" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="membEmail" id="membEmail" placeholder="Email">
+                        <input type="email" class="form-control" name="membEmail" id="membEmail" placeholder="Email" value="testsetse">
                     </div>
                 </div>
                 <div class="form-group">
