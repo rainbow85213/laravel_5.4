@@ -7,7 +7,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" name="membSubmitFrm" id="membSubmitFrm" method="POST" action="{{ route('admin::member::save') }}" onSubmit="return membJoin();">
+        <form class="form-horizontal" name="membSubmitFrm" id="membSubmitFrm" method="POST" action="{{ route('admin::member::update') }}" onSubmit="return membJoin();">
             {!! csrf_field() !!}
             <div class="box-body col-sm-6">
                 <div class="form-group">

@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\Admin\Member;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 use App\User;
 
 class MemberController extends Controller
@@ -48,5 +48,43 @@ class MemberController extends Controller
     public function create()
     {
         return view('admin.member.create');
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function save(Request $request)
+    {
+        list($membEmailId , $membEmailAddr) = @explode('@' , $request->input('membEmail'));
+
+        $user = new User();
+
+        $user->email        = $request->input('membEmail');
+        $user->email_id     = $membEmailId;
+        $user->email_addr   = $membEmailAddr;
+        $user->name         = $request->input('membName');
+        $user->password     = bcrypt($request->input('membPw'));
+        $user->user_hp      = $request->input('membHp');
+        $user->memb_type    = $request->input('membType');
+        if($request->input('membType') == "admin") $user->company_type = $request->input('inputCompanyGroup');
+
+        $user->save();
+
+        return redirect(route('admin::member::index'));
+
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($user_id)
+    {
+        return view('admin.member.show');
     }
 }

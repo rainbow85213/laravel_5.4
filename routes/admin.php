@@ -31,13 +31,23 @@ Route::group([
     ] , function() {
 
         Route::any('/' , [
-            'as' => 'index'
+                'as' => 'index'
             ,   'uses' => 'Admin\Member\MemberController@index'
         ]);
 
         Route::any('/create' , [
-            'as' => 'create'
+                'as' => 'create'
             ,   'uses' => 'Admin\Member\MemberController@create'
+        ]);
+
+        Route::any('/save' , [
+                'as' => 'save'
+            ,   'uses' => 'Admin\Member\MemberController@save'
+        ]);
+
+        Route::get('/show/{id}' , [
+                'as' => 'show'
+            ,   'uses' => 'Admin\Member\MemberController@save'
         ]);
 
     });
