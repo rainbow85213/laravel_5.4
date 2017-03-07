@@ -40,14 +40,19 @@ Route::group([
             ,   'uses' => 'Admin\Member\MemberController@create'
         ]);
 
-        Route::any('/save' , [
+        Route::post('/save' , [
                 'as' => 'save'
             ,   'uses' => 'Admin\Member\MemberController@save'
         ]);
 
         Route::get('/show/{id}' , [
                 'as' => 'show'
-            ,   'uses' => 'Admin\Member\MemberController@save'
+            ,   'uses' => 'Admin\Member\MemberController@show'
+        ]);
+
+        Route::post('/update' , [
+            'as' => 'update'
+            ,   'uses' => 'Admin\Member\MemberController@update'
         ]);
 
     });

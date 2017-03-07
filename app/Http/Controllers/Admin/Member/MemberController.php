@@ -85,6 +85,41 @@ class MemberController extends Controller
      */
     public function show($user_id)
     {
-        return view('admin.member.show');
+        $user = new User();
+        $userArr = $user->whereId($user_id)->first();
+
+//        dd($userArr);
+
+        return view('admin.member.show')
+                ->with('userArr' , $userArr);
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        list($membEmailId , $membEmailAddr) = @explode('@' , $request->input('membEmail'));
+
+        $user = new User();
+
+        $user = $user->whereId($request->input('userId'))->first();
+
+        $user->email        = $request->input('membEmail');
+        $user->email_id     = $membEmailId;
+        $user->email_addr   = $membEmailAddr;
+        $user->name         = $request->input('membName');
+        $user->password     = bcrypt($request->input('membPw'));
+        $user->user_hp      = $request->input('membHp');
+        $user->memb_type    = $request->input('membType');
+        if($request->input('membType') == "admin") $user->company_type = $request->input('inputCompanyGroup');
+
+        $user->save();
+
+        return redirect(route('admin::member::index'));
+
     }
 }

@@ -9,17 +9,18 @@
         <!-- form start -->
         <form class="form-horizontal" name="membSubmitFrm" id="membSubmitFrm" method="POST" action="{{ route('admin::member::update') }}" onSubmit="return membJoin();">
             {!! csrf_field() !!}
+            <input type="hidden" name="userId" value="{{ $userArr->id }}">
             <div class="box-body col-sm-6">
                 <div class="form-group">
                     <label for="membType" class="col-sm-2 control-label">회원 사용처</label>
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <label>
                             <input type="radio" name="membType" class="membType minimal" value="member" checked> &nbsp;
                             일반용
                         </label>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <label>
                             <input type="radio" name="membType" class="membType minimal" value="admin"> &nbsp;
                             관리자용
@@ -42,34 +43,34 @@
                     <label for="membEmail" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="membEmail" id="membEmail" placeholder="Email" value="testsetse">
+                        <input type="email" class="form-control" name="membEmail" id="membEmail" placeholder="Email" value="{{ $userArr->email }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="membPw" class="col-sm-2 control-label">Password</label>
 
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" name="membPw" id="membPw" placeholder="Password">
+                        <a href="#" type="button" class="btn btn-default"><i class="fa fa-undo"></i> 초기화</a>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="membName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="membName" id="membName" placeholder="Member Name">
+                        <input type="text" class="form-control" name="membName" id="membName" placeholder="Member Name" value="{{ $userArr->name }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="membHp" class="col-sm-2 control-label">Hp</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="membHp" id="membHp" placeholder="Member Hp">
+                        <input type="text" class="form-control" name="membHp" id="membHp" placeholder="Member Hp" value="{{ $userArr->user_hp }}">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <button type="button" class="btn btn-default">Cancel</button>
-                    <button type="submit" class="btn btn-info pull-right">Sign in</button>
+                    <a type="button" href="{{ URL::route('admin::member::index') }}" class="btn btn-default">List</a>
+                    <button type="submit" class="btn btn-info pull-right">Update</button>
                 </div>
             </div>
             <!-- /.box-body -->
@@ -110,12 +111,6 @@
             if($.trim($("#membEmail").val()) == "") {
                 alert('[알림!] 회원 이메일을 입력해 주시기 바랍니다');
                 $("#membEmail").focus();
-                return false;
-            }
-
-            if($.trim($("#membPw").val()) == "") {
-                alert('[알림!] 회원 비밀번호를 입력해 주시기 바랍니다.');
-                $("#membPw").focus();
                 return false;
             }
 

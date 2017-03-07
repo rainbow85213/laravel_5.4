@@ -13,13 +13,13 @@
                 <div class="form-group">
                     <label for="membType" class="col-sm-2 control-label">회원 사용처</label>
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <label>
                             <input type="radio" name="membType" class="membType minimal" value="member" checked> &nbsp;
                             일반용
                         </label>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <label>
                             <input type="radio" name="membType" class="membType minimal" value="admin"> &nbsp;
                             관리자용
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="button" class="btn btn-default">Cancel</button>
+                    <a type="button" href="{{ URL::route('admin::member::index') }}" class="btn btn-default">List</a>
                     <button type="submit" class="btn btn-info pull-right">Sign in</button>
                 </div>
             </div>

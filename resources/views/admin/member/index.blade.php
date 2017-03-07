@@ -18,6 +18,7 @@
                                 <tr>
                                     <th class="text-center">Index</th>
                                     <th class="text-center">회원명</th>
+                                    <th class="text-center">모바일</th>
                                     <th class="text-center">이메일</th>
                                     <th class="text-center">Point</th>
                                     <th class="text-center">비고</th>
@@ -29,9 +30,10 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->user_hp }}</td>
                                     <td>{{ $user->point }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-info"><i class="fa fa-tv"></i> 상세</button>
+                                        <a href="{{ URL::route('admin::member::show' , $user->id) }}" type="button" class="btn btn-info"><i class="fa fa-tv"></i> 상세</a>
                                         <button type="button" class="btn btn-danger"><i class="fa fa-close"></i>탈퇴</button>
                                     </td>
                                 </tr>
