@@ -33,7 +33,9 @@ class MemberController extends Controller
     {
         $users = new User();
 
-        $user_arr = $users->all();
+        $user_arr = $users
+                    ->whereUse_yn('Y')
+                    ->get();
 
         return view('admin.member.index')
                 ->with('user_arr' , $user_arr);
@@ -121,5 +123,22 @@ class MemberController extends Controller
 
         return redirect(route('admin::member::index'));
 
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destory($user_id)
+    {
+        $user = new User();
+        $user = $user->whereId($user_id)->first();
+
+        $user->use_yn = 'N';
+        $user->save();
+
+        return redirect(route('admin::member::index'));
     }
 }

@@ -55,5 +55,10 @@ Route::group([
             ,   'uses' => 'Admin\Member\MemberController@update'
         ]);
 
+        Route::get('/destory/{id}' , [
+                'as' => 'destory'
+            ,   'uses' => 'Admin\Member\MemberController@destory'
+        ]);
+
     });
 });

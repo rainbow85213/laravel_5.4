@@ -34,7 +34,7 @@
                                     <td>{{ $user->point }}</td>
                                     <td>
                                         <a href="{{ URL::route('admin::member::show' , $user->id) }}" type="button" class="btn btn-info"><i class="fa fa-tv"></i> 상세</a>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-close"></i>탈퇴</button>
+                                        <button type="button" class="btn btn-danger membDestory" membId="{{ $user->id }}"><i class="fa fa-close"></i>탈퇴</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -76,6 +76,13 @@
     <script type="text/javascript">
         $(function () {
             $("#example1").DataTable();
+
+            $("button.membDestory")
+                .on('click' , function() {
+                    if(confirm('[알림!] 회원을 삭제 하시겠습니까? \n* 삭제하면 정보를 찾을 수 없습니다. *')) {
+                        location.href = "/admin/member/destory/" + $(this).attr('membId');
+                    }
+                });
         });
     </script>
 @endsection
