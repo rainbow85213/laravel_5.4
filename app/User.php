@@ -33,4 +33,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function commcds()
+    {
+        return $this->hasMany('App\Models\Tool\Common_cds' , 'id' , 'user_id');
+    }
 }

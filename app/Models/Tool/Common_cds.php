@@ -25,7 +25,19 @@ class Common_cds extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'main_cd' , 'det_cd' ];
+    protected $fillable = [
+          'main_cd'
+        , 'det_cd'
+        , 'user_id'
+        , 'name'
+    ];
 
+    /**
+     * Get the comments for the blog post.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User' , 'user_id');
+    }
 
 }
