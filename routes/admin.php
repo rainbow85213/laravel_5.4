@@ -14,19 +14,19 @@
 Auth::routes();
 
 Route::group([
-    'as' => 'admin::'
+        'as' => 'admin::'
     ,   'prefix' => 'admin'
     ,   'middleware' => 'auth'
 ] , function() {
     // Admin Dashboard Page
     Route::get('/' , [
-        'as' => 'index'
+            'as' => 'index'
         ,   'uses' => 'Admin\DashBoardController@index'
     ]);
 
     // Admin Member Page
     Route::group([
-        'as' => 'member::'
+            'as' => 'member::'
         ,   'prefix' => 'member'
     ] , function() {
 
@@ -57,6 +57,44 @@ Route::group([
 
         Route::get('/destory/{id}' , [
                 'as' => 'destory'
+            ,   'uses' => 'Admin\Member\MemberController@destory'
+        ]);
+
+    });
+
+    // Admin Notice Page
+    Route::group([
+        'as' => 'member::'
+        ,   'prefix' => 'member'
+    ] , function() {
+
+        Route::any('/' , [
+            'as' => 'index'
+            ,   'uses' => 'Admin\Member\MemberController@index'
+        ]);
+
+        Route::any('/create' , [
+            'as' => 'create'
+            ,   'uses' => 'Admin\Member\MemberController@create'
+        ]);
+
+        Route::post('/save' , [
+            'as' => 'save'
+            ,   'uses' => 'Admin\Member\MemberController@save'
+        ]);
+
+        Route::get('/show/{id}' , [
+            'as' => 'show'
+            ,   'uses' => 'Admin\Member\MemberController@show'
+        ]);
+
+        Route::post('/update' , [
+            'as' => 'update'
+            ,   'uses' => 'Admin\Member\MemberController@update'
+        ]);
+
+        Route::get('/destory/{id}' , [
+            'as' => 'destory'
             ,   'uses' => 'Admin\Member\MemberController@destory'
         ]);
 
