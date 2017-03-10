@@ -64,39 +64,69 @@ Route::group([
 
     // Admin Notice Page
     Route::group([
-        'as' => 'member::'
-        ,   'prefix' => 'member'
+            'as' => 'notice::'
+        ,   'prefix' => 'notice'
     ] , function() {
 
         Route::any('/' , [
-            'as' => 'index'
+                'as' => 'index'
             ,   'uses' => 'Admin\Member\MemberController@index'
         ]);
 
         Route::any('/create' , [
-            'as' => 'create'
+                'as' => 'create'
             ,   'uses' => 'Admin\Member\MemberController@create'
         ]);
 
         Route::post('/save' , [
-            'as' => 'save'
+                'as' => 'save'
             ,   'uses' => 'Admin\Member\MemberController@save'
         ]);
 
         Route::get('/show/{id}' , [
-            'as' => 'show'
+                'as' => 'show'
             ,   'uses' => 'Admin\Member\MemberController@show'
         ]);
 
         Route::post('/update' , [
-            'as' => 'update'
+                'as' => 'update'
             ,   'uses' => 'Admin\Member\MemberController@update'
         ]);
 
         Route::get('/destory/{id}' , [
-            'as' => 'destory'
+                'as' => 'destory'
             ,   'uses' => 'Admin\Member\MemberController@destory'
         ]);
+
+    });
+
+    // Admin Common Codes Page
+    Route::group([
+            'as' => 'tool::'
+        ,   'prefix' => 'tool'
+    ] , function() {
+
+        Route::group([
+              'as' => 'common::'
+            , 'prefix' => 'common'
+        ] , function() {
+
+            Route::any('/' , [
+                'as' => 'index'
+                , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@index'
+            ]);
+
+            Route::any('/create' , [
+                    'as' => 'create'
+                , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@create'
+            ]);
+
+            Route::any('/save' , [
+                'as' => 'save'
+                , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@save'
+            ]);
+
+        });
 
     });
 });

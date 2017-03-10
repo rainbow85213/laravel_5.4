@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Tool;
+namespace App\Models\Tool\Common_Cds;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Common_cds extends Model
+class Common_Cds extends Model
 {
     /**
      * The table associated with the model.

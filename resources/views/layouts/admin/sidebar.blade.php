@@ -72,8 +72,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="{{ route('admin::member::index') }}">
-                            <i class="fa fa-child"></i> Member Grade
+                        <a href="{{ route('admin::tool::common::index') }}">
+                            <i class="fa fa-wrench"></i> Common Codes
                         </a>
                     </li>
                 </ul>
