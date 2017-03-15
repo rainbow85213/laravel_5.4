@@ -112,18 +112,28 @@ Route::group([
         ] , function() {
 
             Route::any('/' , [
-                'as' => 'index'
+                  'as' => 'index'
                 , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@index'
             ]);
 
             Route::any('/create' , [
-                    'as' => 'create'
+                  'as' => 'create'
                 , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@create'
             ]);
 
-            Route::any('/save' , [
-                'as' => 'save'
+            Route::post('/save' , [
+                  'as' => 'save'
                 , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@save'
+            ]);
+
+            Route::get('/show/{id}' , [
+                  'as' => 'show'
+                , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@show'
+            ]);
+
+            Route::post('/update' , [
+                'as' => 'update'
+                , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@update'
             ]);
 
         });

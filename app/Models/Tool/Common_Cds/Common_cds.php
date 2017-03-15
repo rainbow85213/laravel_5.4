@@ -40,4 +40,9 @@ class Common_Cds extends Model
         return $this->belongsTo('App\User' , 'user_id');
     }
 
+
+    public function mainCdChk($main_cd) {
+        return $this->whereMain_cd($main_cd)->whereUse_yn('N')->count();
+    }
+
 }

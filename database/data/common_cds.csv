@@ -1,0 +1,4 @@
+main_cd,det_cd,user_id,name,ref_1,ref_2,ref_3,ref_4,ref_5,ref_6,ref_7,ref_8,ref_9,ref_10,use_yn
+A0001,0,1,구분,,,,,,,,,,,Y
+A0001,1,1,공지사항,,,,,,,,,,,Y
+A0001,2,1,새소식,,,,,,,,,,,Y

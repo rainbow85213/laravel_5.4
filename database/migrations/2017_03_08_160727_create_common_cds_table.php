@@ -17,7 +17,7 @@ class CreateCommonCdsTable extends Migration
         Schema::create('common_cds' , function( Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->increments('idx');
+            $table->increments('id');
 
             $table->char('main_cd' , 5)->index();
             $table->integer('det_cd')->unsigned()->index();

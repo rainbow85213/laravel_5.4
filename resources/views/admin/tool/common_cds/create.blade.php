@@ -9,20 +9,16 @@
                         <h3 class="box-title">공통코드 생성</h3>
                     </div>
                     <!-- /.box-header -->
+                    <div style="margin: 10px;"></div>
                     <div class="box-body table-responsive no-padding">
                         <form name="commonSubmitFrm" id="commonSubmitFrm" method="post" action="{{ URL::route('admin::tool::common::save') }}">
+                            {!! csrf_field() !!}
                             <div class="form-group">
                                 <label for="mainCd">메인 코드</label>
-                                <input type="email" class="form-control" id="mainCd" placeholder="메인 코드를 입력해 주세요(ex. M0001)">
+                                <input type="text" class="form-control" id="mainCd" name="mainCd" placeholder="메인 코드를 입력해 주세요(ex. M0001)">
                             </div>
                             <table id="commonCreateTable" class="table table-hover">
                                 <thead>
-                                    <tr>
-                                        <th colspan="2">메인 코드</th>
-                                        <th colspan="11">
-                                            <input type="text" name="main_cd" class="" placeholder="메인 코드를 입력해 주세요(ex. M0001)">
-                                        </th>
-                                    </tr>
                                     <tr>
                                         <th> &nbsp; </th>
                                         <th>상세코드</th>
@@ -78,6 +74,7 @@
         <!-- /.row -->
     </section>
     <!-- /.content -->
+
 @endsection
 
 @section('style')
@@ -151,15 +148,38 @@
 
         $(function () {
 
-            $("#submitDataBtn")
-                .on('click' , function() {
-                    var submitChk = dataPlus(dataCnt);
+            @if($errors->any())
+                OpenModalBox('오류','{!! implode('', $errors->all('<div>:message</div>')) !!}');
+            @endif
 
-                    if(submitChk) dataCnt++;
-                });
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    // error_alert('{{ Session::get('alert-' . $msg) }}');
+                    OpenModalBox('오류','{{ Session::get('alert-' . $msg) }}');
+                @endif
+            @endforeach
+
+                    $("#submitDataBtn")
+            .on('click' , function() {
+                var submitChk = dataPlus(dataCnt);
+
+                if(submitChk) dataCnt++;
+            });
 
             $("#formSubmitBtn")
                 .on('click' , function() {
+                    if($.trim($("#mainCd").val()) == "") {
+                        alert('[알림!] 메인코드를 입력해 주시기 바랍니다.');
+                        $("#mainCd").val("").focus();
+                        return false;
+                    }
+
+                    if($("#mainCd").val().length != 5) {
+                        alert('[알림!] 메인코드는 한자리 영문과 네자리의 숫자로 이루어져 있어야 합니다.');
+                        $("#mainCd").val("").focus();
+                        return false;
+                    }
+
                     if(confirm('[알림!] 공통코드를 생성하시겠습니까?')) {
                         $("#commonSubmitFrm").submit();
                     }
@@ -172,8 +192,12 @@
 
                         if(submitChk) dataCnt++;
                     }
-                })
+                });
 
+            $("#mainCd")
+                .on('focusout' , function() {
+
+                });
         });
     </script>
 @endsection

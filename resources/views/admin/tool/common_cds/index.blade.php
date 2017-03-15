@@ -16,6 +16,7 @@
                         <table id="commonCdsTable" class="table table-bordered table-striped">
                             <thead>
                             <tr>
+                                <th class="text-center">작성자</th>
                                 <th class="text-center">main_cd</th>
                                 <th class="text-center">name</th>
                                 <th class="text-center">ref_1</th>
@@ -32,18 +33,34 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($common_cds_arr AS $common_cd)
+                            @forelse($commonCdsArr AS $commonCd)
                                 <tr>
-
+                                    <td>{{ $commonCd->user->name }}</td>
+                                    <td>{{ $commonCd->main_cd }}</td>
+                                    <td>{{ $commonCd->name }}</td>
+                                    <td>{{ $commonCd->ref_1 }}</td>
+                                    <td>{{ $commonCd->ref_2 }}</td>
+                                    <td>{{ $commonCd->ref_3 }}</td>
+                                    <td>{{ $commonCd->ref_4 }}</td>
+                                    <td>{{ $commonCd->ref_5 }}</td>
+                                    <td>{{ $commonCd->ref_6 }}</td>
+                                    <td>{{ $commonCd->ref_7 }}</td>
+                                    <td>{{ $commonCd->ref_8 }}</td>
+                                    <td>{{ $commonCd->ref_9 }}</td>
+                                    <td>{{ $commonCd->ref_10 }}</td>
+                                    <td class="text-center">
+                                        <a type="button" href="{{ URL::route('admin::tool::common::show' , $commonCd->main_cd) }}" class="btn btn-info">상세보기</a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="13">등록된 공통코드가 없습니다.</td>
+                                    <td class="text-center" colspan="14">등록된 공통코드가 없습니다.</td>
                                 </tr>
                             @endforelse
                             </tbody>
                             <tfoot>
                             <tr>
+                                <th class="text-center">작성자</th>
                                 <th class="text-center">main_cd</th>
                                 <th class="text-center">name</th>
                                 <th class="text-center">ref_1</th>
