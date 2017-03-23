@@ -25,6 +25,10 @@ class CreateUsersTable extends Migration
             $table->char('user_hp' , 13)->nullable();
             $table->integer('point')->unsigned()->default(0);
             $table->integer('cash')->unsigned()->default(0);
+
+            $table->enum('use_yn' , [ 'Y' , 'N' ])->default('Y');
+            $table->softDeletes();
+
             $table->rememberToken();
             $table->timestamps();
 
