@@ -35,7 +35,7 @@ Route::group([
             ,   'uses' => 'Admin\Member\MemberController@index'
         ]);
 
-        Route::any('/create' , [
+        Route::get('/create' , [
                 'as' => 'create'
             ,   'uses' => 'Admin\Member\MemberController@create'
         ]);
@@ -62,44 +62,6 @@ Route::group([
 
     });
 
-    // Admin Notice Page
-    Route::group([
-            'as' => 'notice::'
-        ,   'prefix' => 'notice'
-    ] , function() {
-
-        Route::any('/' , [
-                'as' => 'index'
-            ,   'uses' => 'Admin\Member\MemberController@index'
-        ]);
-
-        Route::any('/create' , [
-                'as' => 'create'
-            ,   'uses' => 'Admin\Member\MemberController@create'
-        ]);
-
-        Route::post('/save' , [
-                'as' => 'save'
-            ,   'uses' => 'Admin\Member\MemberController@save'
-        ]);
-
-        Route::get('/show/{id}' , [
-                'as' => 'show'
-            ,   'uses' => 'Admin\Member\MemberController@show'
-        ]);
-
-        Route::post('/update' , [
-                'as' => 'update'
-            ,   'uses' => 'Admin\Member\MemberController@update'
-        ]);
-
-        Route::get('/destory/{id}' , [
-                'as' => 'destory'
-            ,   'uses' => 'Admin\Member\MemberController@destory'
-        ]);
-
-    });
-
     // Admin Common Codes Page
     Route::group([
             'as' => 'tool::'
@@ -116,7 +78,7 @@ Route::group([
                 , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@index'
             ]);
 
-            Route::any('/create' , [
+            Route::get('/create' , [
                   'as' => 'create'
                 , 'uses' => 'Admin\Tool\Common_Cds\CommonCdsController@create'
             ]);
@@ -139,4 +101,46 @@ Route::group([
         });
 
     });
+
+
+    // Admin BBS Notice Codes Page
+    Route::group([
+            'as' => 'bbs::'
+        ,   'prefix' => 'bbs'
+    ] , function() {
+
+        Route::group([
+              'as' => 'notice::'
+            , 'prefix' => 'notice'
+        ] , function() {
+
+            Route::any('/' , [
+                  'as' => 'index'
+                , 'uses' => 'Admin\Bbs\Notice\BbsNoticeController@index'
+            ]);
+
+            Route::get('/create' , [
+                  'as' => 'create'
+                , 'uses' => 'Admin\Bbs\Notice\BbsNoticeController@create'
+            ]);
+
+            Route::post('/save' , [
+                  'as' => 'save'
+                , 'uses' => 'Admin\Bbs\Notice\BbsNoticeController@save'
+            ]);
+
+            Route::get('/show/{id}' , [
+                  'as' => 'show'
+                , 'uses' => 'Admin\Bbs\Notice\BbsNoticeController@show'
+            ]);
+
+            Route::post('/update' , [
+                  'as' => 'update'
+                , 'uses' => 'Admin\Bbs\Notice\BbsNoticeController@update'
+            ]);
+
+        });
+
+    });
+
 });

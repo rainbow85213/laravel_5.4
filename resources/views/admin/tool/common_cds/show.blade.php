@@ -167,18 +167,18 @@
             @endif
 
             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-            @if(Session::has('alert-' . $msg))
-            // error_alert('{{ Session::get('alert-' . $msg) }}');
-            OpenModalBox('오류','{{ Session::get('alert-' . $msg) }}');
-            @endif
-        @endforeach
+                @if(Session::has('alert-' . $msg))
+                // error_alert('{{ Session::get('alert-' . $msg) }}');
+                OpenModalBox('오류','{{ Session::get('alert-' . $msg) }}');
+                @endif
+            @endforeach
 
-                $("#submitDataBtn")
-                .on('click' , function() {
-                    var submitChk = dataPlus(dataCnt);
+            $("#submitDataBtn")
+            .on('click' , function() {
+                var submitChk = dataPlus(dataCnt);
 
-                    if(submitChk) dataCnt++;
-                });
+                if(submitChk) dataCnt++;
+            });
 
             $("#formSubmitBtn")
                 .on('click' , function() {

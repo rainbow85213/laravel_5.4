@@ -39,6 +39,14 @@ class User extends Authenticatable
      */
     public function commcds()
     {
-        return $this->hasMany('App\Models\Tool\Common_cds' , 'id' , 'user_id');
+        return $this->hasMany('App\Models\Tool\Common_cds\Common_Cds' , 'id' , 'user_id');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function bbs_notice()
+    {
+        return $this->hasMany('App\Models\Bbs\Notice\Bbs_Notice' , 'id' , 'bbs_notice_writer_id');
     }
 }

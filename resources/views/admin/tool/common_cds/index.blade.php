@@ -73,7 +73,7 @@
                                 <th class="text-center">ref_8</th>
                                 <th class="text-center">ref_9</th>
                                 <th class="text-center">ref_10</th>
-                                <th class="text-center">비고
+                                <th class="text-center">비고</th>
                             </tr>
                             </tfoot>
                         </table>

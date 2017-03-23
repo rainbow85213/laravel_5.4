@@ -50,7 +50,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('admin::bbs::notice::index') }}">
                     <i class="fa fa-desktop"></i> <span>Notice</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-green">new</small>
