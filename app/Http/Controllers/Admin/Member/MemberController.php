@@ -14,6 +14,7 @@ use App\User;
 
 class MemberController extends Controller
 {
+    public $side = "member";
     /**
      * Create a new controller instance.
      *
@@ -38,6 +39,7 @@ class MemberController extends Controller
                     ->get();
 
         return view('admin.member.index')
+                ->with('side' , $this->side)
                 ->with('user_arr' , $user_arr);
     }
 
@@ -93,6 +95,7 @@ class MemberController extends Controller
 //        dd($userArr);
 
         return view('admin.member.show')
+                ->with('side' , $this->side)
                 ->with('userArr' , $userArr);
     }
 

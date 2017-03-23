@@ -25,7 +25,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview active">
+            <li class="treeview {{ ($side == "member" ? "active" : "") }}">
                 <a href="#">
                     <i class="fa fa-group"></i>
                     <span>Member</span>
@@ -41,7 +41,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ ($side == "review" ? "active" : "") }}">
                 <a href="#">
                     <i class="fa fa-th"></i> <span>Review</span>
                     <span class="pull-right-container">
@@ -49,7 +49,7 @@
                     </span>
                 </a>
             </li>
-            <li>
+            <li class="{{ ($side == "notice" ? "active" : "") }}">
                 <a href="{{ route('admin::bbs::notice::index') }}">
                     <i class="fa fa-desktop"></i> <span>Notice</span>
                     <span class="pull-right-container">
@@ -57,7 +57,7 @@
                     </span>
                 </a>
             </li>
-            <li>
+            <li class="{{ ($side == "event" ? "active" : "") }}">
                 <a href="#">
                     <i class="fa fa-calendar-check-o"></i> <span>Event</span>
                     <span class="pull-right-container">
@@ -65,7 +65,7 @@
                     </span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ ($side == "policy" ? "active" : "") }}">
                 <a href="#">
                     <i class="fa fa-cog"></i>
                     <span>Policy</span>

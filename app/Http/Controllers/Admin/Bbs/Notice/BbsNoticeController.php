@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 
 class BbsNoticeController extends Controller
 {
+    public $side = "notice";
+
     /**
      * 게시판 - 공지사항
      * @ Developer : Rainbow85213
@@ -48,6 +50,7 @@ class BbsNoticeController extends Controller
                             ->paginate(15);
 
         return view('admin.bbs.notice.index')
+                ->with('side' , $this->side)
                 ->with('userId' , $userId)
                 ->with('bbsNoticeArr' , $bbsNoticeArr);
     }
@@ -66,6 +69,7 @@ class BbsNoticeController extends Controller
         $bbsNoticeTypeArr = $commonCds->whereMain_cd('A0001')->whereUse_yn('Y')->orderBy('det_cd' , 'ASC')->get();
 
         return view('admin.bbs.notice.create')
+                ->with('side' , $this->side)
                 ->with('userId' , $userId)
                 ->with('bbsNoticeTypeArr' , $bbsNoticeTypeArr);
     }
@@ -113,8 +117,9 @@ class BbsNoticeController extends Controller
                             ->first();
 
         return view('admin.bbs.notice.show')
-            ->with('userId' , $userId)
-            ->with('bbsNoticeArr' , $bbsNoticeArr);
+                ->with('side' , $this->side)
+                ->with('userId' , $userId)
+                ->with('bbsNoticeArr' , $bbsNoticeArr);
     }
 
     /**

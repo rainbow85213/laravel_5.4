@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 
 class CommonCdsController extends Controller
 {
+    public $side = "policy";
+
     public function index() {
         $commonCds = new Common_Cds();
 
@@ -28,12 +30,14 @@ class CommonCdsController extends Controller
                             ->get();
 //        dd($common_cds_arr);
         return view('admin.tool.common_cds.index')
+            ->with('side' , $this->side)
             ->with('commonCdsArr' , $commonCdsArr);
     }
 
 
     public function create() {
-        return view('admin.tool.common_cds.create');
+        return view('admin.tool.common_cds.create')
+                ->with('side' , $this->side);
     }
 
     public function save(Request $_req) {
@@ -116,6 +120,7 @@ class CommonCdsController extends Controller
         }
 
         return view('admin.tool.common_cds.show')
+            ->with('side' , $this->side)
             ->with('mainCd' , $common_main_cd)
             ->with('commonCdsArr' , $tmpArr);
     }
