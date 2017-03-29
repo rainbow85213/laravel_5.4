@@ -49,4 +49,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Bbs\Notice\Bbs_Notice' , 'id' , 'bbs_notice_writer_id');
     }
+
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function user_point()
+    {
+        return $this->hasMany('App\Models\Member\User_point' , 'id' , 'user_id');
+    }
 }
