@@ -50,12 +50,27 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Bbs\Notice\Bbs_Notice' , 'id' , 'bbs_notice_writer_id');
     }
 
-
     /**
      * Get the comments for the blog post.
      */
     public function user_point()
     {
         return $this->hasMany('App\Models\Member\User_point' , 'id' , 'user_id');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function review_base()
+    {
+        return $this->hasMany('App\Models\Bbs\Notice\Review_base' , 'id' , 'user_id');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function company_base()
+    {
+        return $this->hasMany('App\Models\Company\Company_base' , 'id' , 'user_id');
     }
 }

@@ -69,9 +69,11 @@
     <!-- Select2 -->
     <script src="/plugins/select2/select2.full.min.js"></script>
     <!-- CK Editor -->
-    <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+    <script src="/plugins/ckeditor/ckeditor.js"></script>
 
     <script type="text/javascript">
+        CKEDITOR.replace('bbsNoticeContent');
+
         function bbs_notice_submit() {
             if($.trim($("#bbsNoticeType").val()) == "0") {
                 alert('[알림!] 구분을 선택해 주시기 바랍니다.');
@@ -90,8 +92,6 @@
 
         $(function () {
             $(".select2").select2();
-
-            CKEDITOR.replace('bbsNoticeContent');
         });
     </script>
 @endsection
