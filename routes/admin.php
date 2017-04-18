@@ -139,6 +139,43 @@ Route::group([
                 , 'uses' => 'Admin\Bbs\Notice\BbsNoticeController@update'
             ]);
 
+            Route::any('/img_upload' , [
+                  'as' => 'img_upload'
+                , 'uses' => 'Admin\Bbs\Notice\BbsNoticeController@img_upload'
+            ]);
+
+        });
+
+        Route::group([
+            'as' => 'review::'
+            , 'prefix' => 'review'
+        ] , function() {
+
+            Route::any('/' , [
+                'as' => 'index'
+                , 'uses' => 'Admin\Bbs\Review\ReviewBaseController@index'
+            ]);
+
+            Route::get('/create' , [
+                'as' => 'create'
+                , 'uses' => 'Admin\Bbs\Review\ReviewBaseController@create'
+            ]);
+
+            Route::post('/save' , [
+                'as' => 'save'
+                , 'uses' => 'Admin\Bbs\Review\ReviewBaseController@save'
+            ]);
+
+            Route::get('/show/{review_id}' , [
+                'as' => 'show'
+                , 'uses' => 'Admin\Bbs\Review\ReviewBaseController@show'
+            ]);
+
+            Route::post('/update' , [
+                'as' => 'update'
+                , 'uses' => 'Admin\Bbs\Review\ReviewBaseController@update'
+            ]);
+
         });
 
     });

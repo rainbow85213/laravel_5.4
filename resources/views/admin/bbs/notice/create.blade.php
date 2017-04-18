@@ -7,7 +7,6 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Notice Create</h3>
-
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -69,10 +68,15 @@
     <!-- Select2 -->
     <script src="/plugins/select2/select2.full.min.js"></script>
     <!-- CK Editor -->
-    <script src="/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/plugins/ckeditor_sdk/vendor/ckeditor/ckeditor.js"></script>
 
     <script type="text/javascript">
-        CKEDITOR.replace('bbsNoticeContent');
+        CKEDITOR.replace( 'bbsNoticeContent', {
+            height: 300,
+
+            // Configure your file manager integration. This example uses CKFinder 3 for PHP.
+            filebrowserImageUploadUrl: '{{ URL::route('admin::bbs::notice::img_upload') }}'
+        } );
 
         function bbs_notice_submit() {
             if($.trim($("#bbsNoticeType").val()) == "0") {

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see license.html or http://sdk.ckeditor.com/license.html.
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Accessibility Checker">
+	<meta name="keywords" content="ckeditor, editor, wysiwyg, accessibility, keyboard, a11y, quickfix, content, disability">
+	<meta name="sdk-samples" content="Accessibility Checker">
+	<title>CKEditor SDK » Samples » Accessibility Checker</title>
+	<link href="../theme/css/fonts.css" rel="stylesheet">
+	<link href="../theme/css/sdk.css" rel="stylesheet">
+	<script src="../vendor/ckeditor/ckeditor.js"></script>
+	<script src="assets/picoModal-2.0.1.min.js"></script>
+	<script src="assets/sample.js"></script>
+	<script src="assets/contentloaded.js"></script>
+	<script src="assets/simplesample.js"></script>
+	<script src="assets/beautify-html.js"></script>
+	<script data-sample="1" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<!--[if lt IE 9]>
+	<script src="assets/html5shiv.min.js"></script>
+	<![endif]-->
+	<link rel="icon" href="../theme/img/favicon.ico">
+<script>
+		if ( location.hostname == 'sdk.ckeditor.com' ) {
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-271067-15', 'auto');
+			ga('send', 'pageview');
+		}
+	</script><meta name="robots" content="noindex, nofollow"></head>
+<body>
+	<header class="sdk-header">
+		<h1 class="sdk-logo">
+			<a href="../index.html"><img src="../theme/img/logo.png" alt="CKEditor SDK - index"></a>
+		</h1>
+		<nav class="sdk-top-navigation">
+			<ul>
+				<li><a href="http://ckeditor.com">Project Homepage</a></li>
+				<li><a href="https://github.com/ckeditor/ckeditor-sdk/issues">I found a bug in SDK</a></li>
+				<li><a href="http://github.com/ckeditor/ckeditor-dev">Fork CKEditor on GitHub</a></li>
+			</ul>
+			<ul class="right">
+				<li><a href="http://ckeditor.com/blog-list">CKEditor Blog</a></li>
+			</ul>
+		</nav>
+		<nav class="sdk-main-navigation">
+			<ul>
+				<li><a href="../index.html" class="active">Samples</a></li>
+				<li><a href="../docs/index.html#!/guide">Documentation</a></li>
+				<li><a href="../docs/index.html#!/api">CKEditor API</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section class="sdk-container">
+		<nav class="sdk-sidebar"><h2>End-user Features</h2><h3>User Interface</h3><ul><li class=""><a href="uicolor.html">UI Color</a></li><li class=""><a href="uilanguages.html">UI Language</a></li></ul><h3>Editor Resizing</h3><ul><li class=""><a href="size.html">Editor Size</a></li><li class=""><a href="autogrow.html">Editor Auto Grow</a></li><li class=""><a href="resize.html">Resizing Customization</a></li></ul><h3>Inserting Content</h3><ul><li class=""><a href="captionedimage.html">Captioned Images</a></li><li class=""><a href="fileupload.html">File Upload</a></li><li class=""><a href="mediaembed.html">Embedding Media Resources</a></li><li class=""><a href="table.html">Tables with Column Resizing</a></li><li class=""><a href="codesnippet.html">Code Snippets</a></li><li class=""><a href="mathjax.html">Mathematical Formulas</a></li><li class=""><a href="placeholder.html">Placeholders</a></li></ul><h3>Authoring Content</h3><ul><li class=""><a href="basicstyles.html">Basic Text Styles</a></li><li class=""><a href="copyformatting.html">Copying Text Formatting</a></li><li class=""><a href="removeformat.html">Removing Text Formatting</a></li><li class=""><a href="styles.html">Styles and Stylesheet Parser</a></li><li class=""><a href="format.html">Text Formats</a></li><li class=""><a href="colorbutton.html">Text and Background Color</a></li><li class=""><a href="language.html">Multilingual Content</a></li></ul><h3>Working with Document</h3><ul><li class=""><a href="spellchecker.html">Spell Checking</a></li><li class=""><a href="sourcearea.html">Source Code Editing</a></li><li class=""><a href="magicline.html">Magic Line</a></li></ul><h3 class="active">Accessibility Support</h3><ul><li class=""><a href="accessibility.html">Accessibility and Keyboard Shortcuts</a></li><li class="active"><a href="accessibilitychecker.html">Accessibility Checker</a></li><li class=""><a href="tabindex.html">&quot;Tab&quot; Key Navigation</a></li></ul><h2>Integration Features</h2><h3>Editor Types</h3><ul><li class=""><a href="classic.html">Classic Editor</a></li><li class=""><a href="inline.html">Inline Editor</a></li></ul><h3>Editor UI</h3><ul><li class=""><a href="fixedui.html">Fixed User Interface</a></li><li class=""><a href="floatingui.html">Floating User Interface</a></li><li class=""><a href="sharedspace.html">Shared User Interface</a></li></ul><h3>Editor Presets</h3><ul><li class=""><a href="basicpreset.html">Basic Preset</a></li><li class=""><a href="standardpreset.html">Standard Preset</a></li><li class=""><a href="fullpreset.html">Full Preset</a></li></ul><h3>Toolbar</h3><ul><li class=""><a href="toolbar.html">Custom Toolbar</a></li><li class=""><a href="toolbarlocation.html">Toolbar Location</a></li></ul><h3>Content Filtering</h3><ul><li class=""><a href="acf.html">ACF &ndash; Automatic Mode</a></li><li class=""><a href="acfcustom.html">ACF &ndash; Custom Mode</a></li></ul><h3>Saving Data</h3><ul><li class=""><a href="savetextarea.html">Saving Textarea Data</a></li><li class=""><a href="saveajax.html">Saving in Ajax Applications</a></li></ul><h3>Output Control</h3><ul><li class=""><a href="htmlformatting.html">HTML Output Formatting</a></li><li class=""><a href="fullpage.html">Editing Complete HTML Pages</a></li><li class=""><a href="enterkey.html">Enter Key Configuration</a></li><li class=""><a href="bbcode.html">BBCode Editing</a></li></ul><h3>API Usage</h3><ul><li class=""><a href="api.html">Using CKEditor API</a></li><li class=""><a href="readonly.html">Read-Only Mode</a></li><li class=""><a href="draganddrop.html">Drag and Drop Integration</a></li></ul><h3>Utilities</h3><ul><li class=""><a href="devtools.html">Developer Tools</a></li><li class=""><a href="uicolorpicker.html">UI Color Picker</a></li></ul><h3>Tutorials</h3><ul><li class=""><a href="timestamp.html">Timestamp Plugin</a></li><li class=""><a href="abbr.html">Abbreviation Plugin</a></li><li class=""><a href="simplebox.html">Custom Widget</a></li></ul></nav>
+		<section class="sdk-contents">
+			<h1>Managing Content Accessibility with Accessibility Checker <a class="documentation" href="../docs/index.html#!/guide/dev_accessibility_checker">Documentation</a></h1>
+
+			<p>
+				<a href="https://cksource.com/accessibility-checker/">Accessibility Checker</a> is an innovative solution that lets you <strong>inspect the accessibility level of content created in CKEditor</strong> and immediately <strong>solve any accessibility issues that are found</strong>.
+			</p>
+			<p>
+				This solution is based on two optional plugins (<a href="http://ckeditor.com/addon/a11ychecker">Accessibility Checker</a> and <a href="http://ckeditor.com/addon/balloonpanel">Balloon Panel</a>) that you can install with <a href="http://ckeditor.com/builder">CKBuilder</a>. By default, it uses <a href="http://quailjs.org/" target="_blank">Quail</a> as its accessibility tests library, but you can integrate any other similar library to achieve comparable results.
+			</p>
+
+			<p class="tip">
+				Accessibility Checker is available under a <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GPL</a> or commercial license. <a href="https://cksource.com/contact " target="_blank">Contact us</a> for more details.
+				<br>
+				Quail, the default accessibility tests library, requires <strong>jQuery 1.x or later</strong> to run. You thus need to add jQuery to any site that is going to use Accessibility Checker.
+			</p>
+
+			<p>
+				When the Accessibility Checker plugin is enabled, the <span class="button_icon" data-icon="a11ychecker" title="Check Accessibility">&nbsp;</span> button is automatically added to the toolbar. Once clicked, it starts checking your content for accessibility issues as defined in the tests library. All issues become highlighted and the Accessibility Checker panel will let you not only navigate through them, but also fix them as you go. Thanks to the <a href="../docs/index.html#!/guide/dev_accessibility_checker-section-using-quick-fixes">Quick Fix</a> feature you can correct common problems directly in the panel, sometimes with just one click of a button!
+			</p>
+
+			<textarea cols="80" id="editor1" name="editor1" rows="10" data-sample="1" data-sample-short="">
+				&lt;h1&gt;Content Accessibility Matters&lt;/h1&gt;
+
+				&lt;p&gt;&lt;img src=&quot;assets/accessibilitychecker/accessibility-matters-01.png&quot; style=&quot;float:right&quot; /&gt; As the creators of a highly popular WYSIWYG rich text editor,&amp;nbsp;&lt;a href=&quot;http://cksource.com/&quot;&gt;CKSource&lt;/a&gt;&amp;nbsp;is no stranger to web standards.&amp;nbsp;&lt;a href=&quot;http://ckeditor.com/demo&quot;&gt;CKEditor&lt;/a&gt;&amp;nbsp;is responsible for producing a good part of the HTML content online so it must always generate semantic markup. Web standards are what keep the Internet from chaos and accessibility plays an important role in defining how the Web is shaped. CKSource is proud of being fully committed to the cause and thus&amp;nbsp;CKEditor complies with most important industry standards, recommendations and checklists, including:&lt;/p&gt;
+
+				&lt;ul&gt;
+					&lt;li&gt;&lt;a href=&quot;http://www.w3.org/WAI/intro/wcag.php&quot;&gt;Web Content Accessibility Guidelines (WCAG 2.0)&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a href=&quot;http://www.state.gov/m/irm/impact/c32157.htm&quot;&gt;Section 508 Amendment to the Rehabilitation Act of 1973&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a href=&quot;http://www.w3.org/WAI/intro/aria.php&quot;&gt;WAI-ARIA&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a href=&quot;http://www-03.ibm.com/able/guidelines/web/accessweb.html&quot;&gt;IBM Web Accessibility Checklist&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+
+				&lt;p&gt;It also includes a &lt;a href=&quot;http://docs.ckeditor.com/#!/guide/dev_a11y&quot;&gt;number of features&lt;/a&gt; that make it easy to use with assistive technologies, such as intuitive &lt;a href=&quot;http://docs.ckeditor.com/#!/guide/dev_shortcuts&quot;&gt;keyboard navigation&lt;/a&gt; or WAI-ARIA based user interface.&lt;/p&gt;
+
+				&lt;p&gt;&lt;strong&gt;Accessibility Checker Is Here!&lt;/strong&gt;&lt;/p&gt;
+
+				&lt;p&gt;Accessibility Checker is an innovative solution that lets you&amp;nbsp;&lt;strong&gt;inspect the accessibility level&lt;/strong&gt;&amp;nbsp;of content created in CKEditor and&amp;nbsp;&lt;strong&gt;immediately solve&lt;/strong&gt;&amp;nbsp;any accessibility issues that are found.&lt;/p&gt;
+
+				&lt;p&gt;It is built upon three key elements:&lt;/p&gt;
+
+				&lt;p&gt;1) &lt;strong&gt;Intuitive user interface&lt;/strong&gt; optimized for quick problem solving.&lt;br /&gt;
+				2) Flexibility allowing you to use the &lt;strong&gt;accessibility checking engine&lt;/strong&gt; of your choice.&lt;br /&gt;
+				3) &lt;strong&gt;Quick Fix&lt;/strong&gt; feature letting you fix common problems fully automatically.&lt;/p&gt;
+
+				&lt;p&gt;All of this comes bundled with a tight integration with CKEditor.&lt;/p&gt;
+
+				&lt;h3&gt;Usage Instructions&lt;/h3&gt;
+
+				&lt;p&gt;You can enable Accessibility Checker by clicking the&amp;nbsp;&lt;strong&gt;Check Accessibility&lt;/strong&gt;&amp;nbsp;(&lt;img alt=&quot;a11ychecker.png&quot; src=&quot;assets/accessibilitychecker/a11ychecker.png&quot; /&gt;) toolbar button. Once the button is clicked, Accessibility Checker will perform the content checking process. Typically it takes a fraction of a second. Depending on the result, Accessibility Checker will switch to&amp;nbsp;&lt;strong&gt;checking mode&lt;/strong&gt;&amp;nbsp;or inform you that the document contains no accessibility issues. If any issues are found, use the Accessbility Checker panel to investigate and fix them - often with one click of a button!&lt;/p&gt;
+
+				&lt;h2&gt;Keyboard Shortcuts&lt;/h2&gt;
+
+				&lt;table&gt;
+					&lt;tbody&gt;
+						&lt;tr&gt;
+							&lt;td&gt;Command&lt;/td&gt;
+							&lt;td&gt;Keystroke&lt;/td&gt;
+							&lt;td&gt;Restrictions&lt;/td&gt;
+						&lt;/tr&gt;
+						&lt;tr&gt;
+							&lt;td&gt;Open or close Accessibility Checker&lt;/td&gt;
+							&lt;td&gt;&lt;kbd&gt;Ctrl+Alt+E&lt;/kbd&gt;&lt;/td&gt;
+							&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+						&lt;/tr&gt;
+						&lt;tr&gt;
+							&lt;td&gt;Next issue&lt;/td&gt;
+							&lt;td&gt;&lt;kbd&gt;Ctrl+E&lt;/kbd&gt;&lt;/td&gt;
+							&lt;td&gt;Checking mode only&lt;/td&gt;
+						&lt;/tr&gt;
+						&lt;tr&gt;
+							&lt;td&gt;Previous issue&lt;/td&gt;
+							&lt;td&gt;&lt;kbd&gt;Ctrl+Shift+E&lt;/kbd&gt;&lt;/td&gt;
+							&lt;td&gt;Checking mode only&lt;/td&gt;
+						&lt;/tr&gt;
+						&lt;tr&gt;
+							&lt;td&gt;Close Accessibility Checker&lt;/td&gt;
+							&lt;td&gt;&lt;kbd&gt;Esc&lt;/kbd&gt;&lt;/td&gt;
+							&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+						&lt;/tr&gt;
+						&lt;tr&gt;
+							&lt;td&gt;Switch to listening mode&lt;/td&gt;
+							&lt;td&gt;&lt;kbd&gt;Shift+Esc&lt;/kbd&gt;&lt;/td&gt;
+							&lt;td&gt;Checking mode only&lt;/td&gt;
+						&lt;/tr&gt;
+						&lt;tr&gt;
+							&lt;td&gt;Switch to checking mode&lt;/td&gt;
+							&lt;td&gt;&lt;kbd&gt;Shift+Esc&lt;/kbd&gt;&lt;/td&gt;
+							&lt;td&gt;Listening mode only&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/tbody&gt;
+				&lt;/table&gt;
+
+				&lt;h2&gt;Additional Information&lt;/h2&gt;
+
+				&lt;p&gt;Read the &lt;a href=&quot;http://docs.ckeditor.com/#!/guide/dev_accessibility_checker&quot;&gt;documentation&lt;/a&gt;, try out this sample and visit &lt;a href=&quot;http://sdk.ckeditor.com/samples/accessibilitychecker.html&quot;&gt;Accessibility Checker&lt;/a&gt; &lt;a href=&quot;http://sdk.ckeditor.com/samples/accessibilitychecker.html&quot;&gt;homepage&lt;/a&gt; for more information.&lt;/p&gt;
+
+				&lt;p&gt;Accessibility Checker is licensed under GPL or a commercial license. &lt;a href=&quot;https://cksource.com/contact&quot;&gt;Contact us&lt;/a&gt; for more details!&lt;/p&gt;
+			</textarea>
+
+			<p>
+				Accessibility Checker comes with good keyboard support. A complete list of all supported keyboard shortcuts is <a href="../docs/index.html#!/guide/dev_accessibility_checker-section-keyboard-shortcuts">available here</a>.
+			</p>
+
+			<h2>Related Features</h2>
+			<ul>
+				<li><a href="./accessibility.html">Accessibility Support &ndash; Accessibility Support and Keyboard Shortcuts</a></li>
+				<li><a href="./tabindex.html">Accessibility Support &ndash; Page Navigation Using the "Tab" Key</a></li>
+			</ul>
+
+			<script data-sample="1">
+				CKEDITOR.plugins.addExternal( 'a11ychecker', '../../samples/assets/plugins/a11ychecker/', 'plugin.js' );
+
+				// Performance optimization:
+				// Send a request for tests JSON file ASAP, so it's likely to be ready when the user runs Acessibility Checker.
+				$.getJSON( 'assets/plugins/a11ychecker/libs/quail/tests.json' );
+
+				CKEDITOR.replace( 'editor1', {
+					extraPlugins: 'a11ychecker',
+					removePlugins: 'scayt,wsc',
+					height: 500,
+					a11ychecker_quailParams: {
+						// Override Accessibility Checker gudielines from the default configuration.
+						guideline: [
+							'imgNonDecorativeHasAlt',
+							'imgImportantNoSpacerAlt',
+							'aTitleDescribesDestination',
+							'aAdjacentWithSameResourceShouldBeCombined',
+							'aImgAltNotRepetitive',
+							'aMustNotHaveJavascriptHref',
+							'aSuspiciousLinkText',
+							'blockquoteNotUsedForIndentation',
+							'documentVisualListsAreMarkedUp',
+							'headerH1',
+							'headerH2',
+							'headerH3',
+							'headerH4',
+							'imgAltIsDifferent',
+							'imgAltIsTooLong',
+							'imgAltNotEmptyInAnchor',
+							'imgAltTextNotRedundant',
+							'imgHasAlt',
+							'imgShouldNotHaveTitle',
+							'linkHasAUniqueContext',
+							'pNotUsedAsHeader',
+							'tableDataShouldHaveTh',
+							'imgWithEmptyAlt'
+						]
+					},
+					contentsCss: [
+						'assets/accessibilitychecker/contents.css',
+						'../vendor/ckeditor/contents.css'
+					]
+				} );
+			</script>
+
+		</section>
+	</section>
+
+	<footer class="sdk-footer">
+		<p>
+			CKEditor &ndash; The text editor for the Internet &ndash; <a class="samples" href="http://ckeditor.com/">http://ckeditor.com</a>
+		</p>
+		<p class="right">
+			Copyright &copy; 2003-2017, <a class="samples" href="http://cksource.com/">CKSource</a> &ndash; Frederico
+			Knabben. <a href="../license.html">All rights reserved</a>.
+		</p>
+	</footer>
+</body>
+</html>

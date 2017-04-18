@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+
+<span id='global-property-'>/**
+</span> * @fileOverview Special Character plugin
+ */
+
+CKEDITOR.plugins.add( 'specialchar', {
+	// List of available localizations.
+	// jscs:disable
+	availableLangs: { af:1,ar:1,az:1,bg:1,ca:1,cs:1,cy:1,da:1,de:1,'de-ch':1,el:1,en:1,'en-gb':1,eo:1,es:1,et:1,eu:1,fa:1,fi:1,fr:1,'fr-ca':1,gl:1,he:1,hr:1,hu:1,id:1,it:1,ja:1,km:1,ko:1,ku:1,lt:1,lv:1,nb:1,nl:1,no:1,oc:1,pl:1,pt:1,'pt-br':1,ru:1,si:1,sk:1,sl:1,sq:1,sv:1,th:1,tr:1,tt:1,ug:1,uk:1,vi:1,zh:1,'zh-cn':1 },
+	lang: 'af,ar,az,bg,bn,bs,ca,cs,cy,da,de,de-ch,el,en,en-au,en-ca,en-gb,eo,es,et,eu,fa,fi,fo,fr,fr-ca,gl,gu,he,hi,hr,hu,id,is,it,ja,ka,km,ko,ku,lt,lv,mk,mn,ms,nb,nl,no,oc,pl,pt,pt-br,ro,ru,si,sk,sl,sq,sr,sr-latn,sv,th,tr,tt,ug,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
+	// jscs:enable
+	requires: 'dialog',
+	icons: 'specialchar', // %REMOVE_LINE_CORE%
+	hidpi: true, // %REMOVE_LINE_CORE%
+	init: function( editor ) {
+		var pluginName = 'specialchar',
+			plugin = this;
+
+		// Register the dialog.
+		CKEDITOR.dialog.add( pluginName, this.path + 'dialogs/specialchar.js' );
+
+		editor.addCommand( pluginName, {
+			exec: function() {
+				var langCode = editor.langCode;
+				langCode =
+					plugin.availableLangs[ langCode ] ? langCode :
+					plugin.availableLangs[ langCode.replace( /-.*/, '' ) ] ? langCode.replace( /-.*/, '' ) :
+					'en';
+
+				CKEDITOR.scriptLoader.load( CKEDITOR.getUrl( plugin.path + 'dialogs/lang/' + langCode + '.js' ), function() {
+					CKEDITOR.tools.extend( editor.lang.specialchar, plugin.langEntries[ langCode ] );
+					editor.openDialog( pluginName );
+				} );
+			},
+			modes: { wysiwyg: 1 },
+			canUndo: false
+		} );
+
+		// Register the toolbar button.
+		editor.ui.addButton &amp;&amp; editor.ui.addButton( 'SpecialChar', {
+			label: editor.lang.specialchar.toolbar,
+			command: pluginName,
+			toolbar: 'insert,50'
+		} );
+	}
+} );
+
+<span id='CKEDITOR-config-cfg-specialChars'>/**
+</span> * The list of special characters visible in the &quot;Special Character&quot; dialog window.
+ *
+ *		config.specialChars = [ '&amp;quot;', '&amp;rsquo;', [ '&amp;custom;', 'Custom label' ] ];
+ *		config.specialChars = config.specialChars.concat( [ '&amp;quot;', [ '&amp;rsquo;', 'Custom label' ] ] );
+ *
+ * @cfg
+ * @member CKEDITOR.config
+ */
+CKEDITOR.config.specialChars = [
+	'!', '&amp;quot;', '#', '$', '%', '&amp;amp;', &quot;'&quot;, '(', ')', '*', '+', '-', '.', '/',
+	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';',
+	'&amp;lt;', '=', '&amp;gt;', '?', '@',
+	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+	'[', ']', '^', '_', '`',
+	'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+	'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+	'{', '|', '}', '~',
+	'&amp;euro;', '&amp;lsquo;', '&amp;rsquo;', '&amp;ldquo;', '&amp;rdquo;', '&amp;ndash;', '&amp;mdash;', '&amp;iexcl;', '&amp;cent;', '&amp;pound;',
+	'&amp;curren;', '&amp;yen;', '&amp;brvbar;', '&amp;sect;', '&amp;uml;', '&amp;copy;', '&amp;ordf;', '&amp;laquo;', '&amp;not;', '&amp;reg;', '&amp;macr;',
+	'&amp;deg;', '&amp;sup2;', '&amp;sup3;', '&amp;acute;', '&amp;micro;', '&amp;para;', '&amp;middot;', '&amp;cedil;', '&amp;sup1;', '&amp;ordm;', '&amp;raquo;',
+	'&amp;frac14;', '&amp;frac12;', '&amp;frac34;', '&amp;iquest;', '&amp;Agrave;', '&amp;Aacute;', '&amp;Acirc;', '&amp;Atilde;', '&amp;Auml;', '&amp;Aring;',
+	'&amp;AElig;', '&amp;Ccedil;', '&amp;Egrave;', '&amp;Eacute;', '&amp;Ecirc;', '&amp;Euml;', '&amp;Igrave;', '&amp;Iacute;', '&amp;Icirc;', '&amp;Iuml;',
+	'&amp;ETH;', '&amp;Ntilde;', '&amp;Ograve;', '&amp;Oacute;', '&amp;Ocirc;', '&amp;Otilde;', '&amp;Ouml;', '&amp;times;', '&amp;Oslash;', '&amp;Ugrave;',
+	'&amp;Uacute;', '&amp;Ucirc;', '&amp;Uuml;', '&amp;Yacute;', '&amp;THORN;', '&amp;szlig;', '&amp;agrave;', '&amp;aacute;', '&amp;acirc;', '&amp;atilde;',
+	'&amp;auml;', '&amp;aring;', '&amp;aelig;', '&amp;ccedil;', '&amp;egrave;', '&amp;eacute;', '&amp;ecirc;', '&amp;euml;', '&amp;igrave;', '&amp;iacute;',
+	'&amp;icirc;', '&amp;iuml;', '&amp;eth;', '&amp;ntilde;', '&amp;ograve;', '&amp;oacute;', '&amp;ocirc;', '&amp;otilde;', '&amp;ouml;', '&amp;divide;',
+	'&amp;oslash;', '&amp;ugrave;', '&amp;uacute;', '&amp;ucirc;', '&amp;uuml;', '&amp;yacute;', '&amp;thorn;', '&amp;yuml;', '&amp;OElig;', '&amp;oelig;',
+	'&amp;#372;', '&amp;#374', '&amp;#373', '&amp;#375;', '&amp;sbquo;', '&amp;#8219;', '&amp;bdquo;', '&amp;hellip;', '&amp;trade;', '&amp;#9658;', '&amp;bull;',
+	'&amp;rarr;', '&amp;rArr;', '&amp;hArr;', '&amp;diams;', '&amp;asymp;'
+];
+</pre>
+</body>
+</html>

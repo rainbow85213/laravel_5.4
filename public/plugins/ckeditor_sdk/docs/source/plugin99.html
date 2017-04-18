@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-use strict'>/**
+</span> * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+
+'use strict';
+
+( function() {
+	CKEDITOR.plugins.add( 'uploadfile', {
+		requires: 'uploadwidget,link',
+		init: function( editor ) {
+			// Do not execute this paste listener if it will not be possible to upload file.
+			if ( !CKEDITOR.plugins.clipboard.isFileApiSupported ) {
+				return;
+			}
+
+			var fileTools = CKEDITOR.fileTools,
+				uploadUrl = fileTools.getUploadUrl( editor.config );
+
+			if ( !uploadUrl ) {
+				CKEDITOR.error( 'uploadfile-config' );
+				return;
+			}
+
+			fileTools.addUploadWidget( editor, 'uploadfile', {
+				uploadUrl: fileTools.getUploadUrl( editor.config ),
+
+				fileToElement: function( file ) {
+					// Show a placeholder with an empty link during the upload.
+					var a = new CKEDITOR.dom.element( 'a' );
+					a.setText( file.name );
+					a.setAttribute( 'href', '#' );
+					return a;
+				},
+
+				onUploaded: function( upload ) {
+					this.replaceWith( '&lt;a href=&quot;' + upload.url + '&quot; target=&quot;_blank&quot;&gt;' + upload.fileName + '&lt;/a&gt;' );
+				}
+			} );
+		}
+	} );
+} )();
+</pre>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+
+( function() {
+	'use strict';
+
+	// Regex by Imme Emosol.
+	var validUrlRegex = /^(https?|ftp):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?[^\s\.,]$/ig,
+		doubleQuoteRegex = /&quot;/g;
+
+	CKEDITOR.plugins.add( 'autolink', {
+		requires: 'clipboard',
+
+		init: function( editor ) {
+			editor.on( 'paste', function( evt ) {
+				var data = evt.data.dataValue;
+
+				if ( evt.data.dataTransfer.getTransferType( editor ) == CKEDITOR.DATA_TRANSFER_INTERNAL ) {
+					return;
+				}
+
+				// If we found &quot;&lt;&quot; it means that most likely there's some tag and we don't want to touch it.
+				if ( data.indexOf( '&lt;' ) &gt; -1 ) {
+					return;
+				}
+
+				// #13419
+				data = data.replace( validUrlRegex , '&lt;a href=&quot;' + data.replace( doubleQuoteRegex, '%22' ) + '&quot;&gt;$&amp;&lt;/a&gt;' );
+
+				// If link was discovered, change the type to 'html'. This is important e.g. when pasting plain text in Chrome
+				// where real type is correctly recognized.
+				if ( data != evt.data.dataValue ) {
+					evt.data.type = 'html';
+				}
+
+				evt.data.dataValue = data;
+			} );
+		}
+	} );
+} )();
+</pre>
+</body>
+</html>

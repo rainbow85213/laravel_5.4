@@ -151,4 +151,50 @@ class BbsNoticeController extends Controller
         }
 
     }
+
+
+
+
+    /**
+     * 게시판 - 에디터 이미지 업로드
+     * @ Developer : Rainbow85213
+     * @ Created : 2017.03.15
+     */
+    public function img_upload(Request $_req) {
+
+        if ($_req->file('upload')->getSize() > 0 ){
+
+            // 현재시간 추출
+            $date_filedir    = date("YmdHis");
+
+            //오리지널 파일 이름.확장자
+            $ext = substr(strrchr($_req->file('upload')->getClientOriginalName(),"."),1);
+            $ext = strtolower($ext);
+            $savefilename = $date_filedir."_".str_replace(" ", "_", $_req->file('upload')->getClientOriginalName());
+
+            $uploadpath  = $_SERVER['DOCUMENT_ROOT']."/upload/images";
+            $uploadsrc = $_SERVER['HTTP_HOST']."/upload/images/";
+            $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ? 's' : '') . '://';
+
+            //php 파일업로드하는 부분
+            if($ext=="jpg" or $ext=="gif" or $ext =="png"){
+                //if(move_uploaded_file($_req->file('upload')->getFilename(),$uploadpath."/".iconv("UTF-8","EUC-KR",$savefilename))){
+                if(move_uploaded_file($_req->file('upload')->getPathname(),$uploadpath."/".$savefilename)){
+                    $uploadfile = $savefilename;
+                    echo "<script type='text/javascript'>alert('업로드성공: ".$savefilename."');</script>;";
+                } else {
+                    dd();
+                }
+
+            }else{
+                echo "<script type='text/javascript'>alert('jpg,gif,png파일만 업로드가능합니다.');</script>;";
+            }
+
+        }else{
+            exit;
+
+        }
+
+        echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction({$_req->input('CKEditorFuncNum')}, '" . $http . $uploadsrc . "$uploadfile');</script>;";
+    }
 }
