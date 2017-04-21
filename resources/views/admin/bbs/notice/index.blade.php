@@ -111,7 +111,7 @@
             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                 @if(Session::has('alert-' . $msg))
                 // error_alert('{{ Session::get('alert-' . $msg) }}');
-                OpenModalBox('오류','{{ Session::get('alert-' . $msg) }}');
+                OpenModalBox('알림','{{ Session::get('alert-' . $msg) }}');
                 @endif
             @endforeach
             // $("#bbsNoticeListTable").DataTable();

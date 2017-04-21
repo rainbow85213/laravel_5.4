@@ -39,6 +39,16 @@
                             <i class="fa fa-child"></i> 회원 관리
                         </a>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-weixin"></i> 쪽지 관리
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-money"></i> 포인트 관리
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="{{ ($side == "review" ? "active" : "") }}">
@@ -48,6 +58,23 @@
                         <small class="label pull-right bg-green">new</small>
                     </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i> 카테고리 1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i> 카테고리 2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i> 카테고리 3
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="{{ ($side == "notice" ? "active" : "") }}">
                 <a href="{{ route('admin::bbs::notice::index') }}">
@@ -64,6 +91,37 @@
                         <small class="label pull-right bg-red">3</small>
                     </span>
                 </a>
+            </li>
+            <li class="treeview {{ ($side == "chart" ? "active" : "") }}">
+                <a href="#">
+                    <i class="fa fa-line-chart"></i>
+                    <span>통계 분석</span>
+                    <span class="pull-right-container">
+                        <span class="label label-primary pull-right">4</span>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-child"></i> 회원 통계
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-wrench"></i> 카테고리 통계
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-map"></i> 지역 통계
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-money"></i> 포인트 통계
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="treeview {{ ($side == "policy" ? "active" : "") }}">
                 <a href="#">

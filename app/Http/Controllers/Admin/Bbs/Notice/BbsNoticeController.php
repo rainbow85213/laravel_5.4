@@ -13,7 +13,10 @@ use Auth;
 use DB;
 use App\Http\Controllers\Controller;
 use App\Models\Bbs\Notice\Bbs_notice;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Models\File\File_info;
 
 
 class BbsNoticeController extends Controller
@@ -90,6 +93,7 @@ class BbsNoticeController extends Controller
         $bbsNotice->bbs_notice_use_yn = 'Y';
         $bbsNotice->save();
 
+        $_req->session()->flash('alert-info' , " 현재 글이 등록되었습니다.");
         return redirect( route('admin::bbs::notice::index') );
     }
 
@@ -142,11 +146,11 @@ class BbsNoticeController extends Controller
 
             $bbsNoticeArr->update();
 
-            $_req->session()->flash('alert-warning' , "[알림!] 현재 글이 수정되었습니다.");
+            $_req->session()->flash('alert-info' , " 현재 글이 수정되었습니다.");
             return redirect( route('admin::bbs::notice::index') );
         } else {
             // 작성자만 글을 수정 가능하다.
-            $_req->session()->flash('alert-danger', "[알림!] 본인 글만 수정 가능합니다.");
+            $_req->session()->flash('alert-danger', " 본인 글만 수정 가능합니다.");
             return back()->withInput();
         }
 
@@ -164,37 +168,32 @@ class BbsNoticeController extends Controller
 
         if ($_req->file('upload')->getSize() > 0 ){
 
-            // 현재시간 추출
-            $date_filedir    = date("YmdHis");
+            $fileInfo = new File_info();
 
-            //오리지널 파일 이름.확장자
-            $ext = substr(strrchr($_req->file('upload')->getClientOriginalName(),"."),1);
-            $ext = strtolower($ext);
-            $savefilename = $date_filedir."_".str_replace(" ", "_", $_req->file('upload')->getClientOriginalName());
+            $filePath = $fileInfo->fileSave($_req->allFiles());
 
-            $uploadpath  = $_SERVER['DOCUMENT_ROOT']."/upload/images";
-            $uploadsrc = $_SERVER['HTTP_HOST']."/upload/images/";
-            $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ? 's' : '') . '://';
+            if($filePath['resultCode']) {
+                $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ? 's' : '') . '://';
+                $returnPath = $http . $_SERVER['HTTP_HOST'] . "/" . str_replace('public' , 'storage' , $filePath['resultData']);
 
-            //php 파일업로드하는 부분
-            if($ext=="jpg" or $ext=="gif" or $ext =="png"){
-                //if(move_uploaded_file($_req->file('upload')->getFilename(),$uploadpath."/".iconv("UTF-8","EUC-KR",$savefilename))){
-                if(move_uploaded_file($_req->file('upload')->getPathname(),$uploadpath."/".$savefilename)){
-                    $uploadfile = $savefilename;
-                    echo "<script type='text/javascript'>alert('업로드성공: ".$savefilename."');</script>;";
-                } else {
-                    dd();
-                }
-
-            }else{
-                echo "<script type='text/javascript'>alert('jpg,gif,png파일만 업로드가능합니다.');</script>;";
+                echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction({$_req->input('CKEditorFuncNum')}, '$returnPath');</script>;";
+            } else {
+                echo "<script type='text/javascript'>alert('파일 업로드에 문제가 발생되었습니다.');</script>;";
             }
 
         }else{
             exit;
 
         }
-
-        echo "<script type='text/javascript'> window.parent.CKEDITOR.tools.callFunction({$_req->input('CKEditorFuncNum')}, '" . $http . $uploadsrc . "$uploadfile');</script>;";
     }
+
+
+    /*
+        $fileInfo = new File_info();
+
+        $filePath = $fileInfo->fileInfo($_req->file('upload_file'));
+
+//      echo $http . $_SERVER['HTTP_HOST'] . "/" . str_replace('public' , 'storage' , $filePath);
+        dd($filePath);
+     */
 }

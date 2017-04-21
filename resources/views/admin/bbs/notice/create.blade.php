@@ -10,10 +10,16 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form method="POST" name="bbsNoticeFrm" id="bbsNoticeFrm" class="form-horizontal" action="{{ URL::route('admin::bbs::notice::save') }}" onSubmit="return bbs_notice_submit();">
+                        <form method="POST" name="bbsNoticeFrm" id="bbsNoticeFrm" class="form-horizontal" enctype="multipart/form-data" action="{{ URL::route('admin::bbs::notice::save') }}" onSubmit="return bbs_notice_submit();">
                             {!! csrf_field() !!}
                             <input type="hidden" name="bbsNoticeWriterId" id="bbsNoticeWriterId" value="{{ $userId }}">
 
+                            {{--<div class="form-group">--}}
+                                {{--<label for="bbsNoticeType" class="col-sm-2 control-label">파일</label>--}}
+                                {{--<div class="col-sm-10">--}}
+                                    {{--<input type="file" name="upload_file" id="upload_file" />--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="form-group">
                                 <label for="bbsNoticeType" class="col-sm-2 control-label">구분</label>
                                 <div class="col-sm-10">
@@ -79,17 +85,17 @@
         } );
 
         function bbs_notice_submit() {
-            if($.trim($("#bbsNoticeType").val()) == "0") {
-                alert('[알림!] 구분을 선택해 주시기 바랍니다.');
-                $("#bbsNoticeType").focus();
-                return false;
-            }
-
-            if($.trim($("#bbsNoticeTitle").val()) == "") {
-                alert('[알림!] 제목을 입력해 주시기 바랍니다.');
-                $("#bbsNoticeTitle").val('').focus();
-                return false;
-            }
+//            if($.trim($("#bbsNoticeType").val()) == "0") {
+//                alert('[알림!] 구분을 선택해 주시기 바랍니다.');
+//                $("#bbsNoticeType").focus();
+//                return false;
+//            }
+//
+//            if($.trim($("#bbsNoticeTitle").val()) == "") {
+//                alert('[알림!] 제목을 입력해 주시기 바랍니다.');
+//                $("#bbsNoticeTitle").val('').focus();
+//                return false;
+//            }
 
             return true;
         }
