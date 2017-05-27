@@ -45,7 +45,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('admin::member::point::index') }}">
                             <i class="fa fa-money"></i> 포인트 관리
                         </a>
                     </li>

@@ -60,6 +60,19 @@ Route::group([
             ,   'uses' => 'Admin\Member\MemberController@destory'
         ]);
 
+
+        Route::group([
+            'as' => 'point::'
+            , 'prefix' => 'point'
+        ] , function() {
+
+            Route::any('/' , [
+                'as' => 'index'
+                , 'uses' => 'Admin\Member\PointController@index'
+            ]);
+
+        });
+
     });
 
     // Admin Common Codes Page

@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
+    public $side = "policy";
+
     /**
      * Create a new controller instance.
      *
@@ -29,6 +31,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        return view('admin.index')
+            ->with('side' , $this->side);
     }
 }
